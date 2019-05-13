@@ -37,7 +37,7 @@ class CycleFile():
         self.file.close()
 
 
-class XMLBreaker(XMLGenerator):    
+class XMLBreaker(XMLGenerator):
     def __init__(self, break_into=None, break_after=1000, out=None, *args, **kwargs):
         XMLGenerator.__init__(self, out, encoding='utf-8', *args, **kwargs)
         self.out_file = out
@@ -62,7 +62,7 @@ class XMLBreaker(XMLGenerator):
                     self.out_file.write(b"\n")
                     XMLGenerator.endElement(self, element[0])
                 self.out_file.cycle()
-                
+
                 XMLGenerator.startDocument(self)
                 for element in self.context:
                     XMLGenerator.startElement(self, *element)
@@ -70,9 +70,9 @@ class XMLBreaker(XMLGenerator):
 
 def generate_index(base_url, filenames):
     now = datetime.datetime.now()
-    dt = now.strftime("%Y-%m-%dT%H:%M:%S")
+    dt = now.strftime("%Y-%m-%d")
     index_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">        
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     """
 
     for filename in filenames:
@@ -82,7 +82,7 @@ def generate_index(base_url, filenames):
                 <lastmod>{}</lastmod>
             </sitemap>
         """.format(base_url+filename, dt)
-    
+
     index_content += """
     </sitemapindex>
     """
